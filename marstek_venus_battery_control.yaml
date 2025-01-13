@@ -1,0 +1,456 @@
+# ------
+# MODBUS
+# ------
+
+modbus:
+  - name: MarstekVenus
+    type: rtuovertcp
+    host: 192.168.1.2
+    port: 8899
+    delay: 1
+    message_wait_milliseconds: 50
+    timeout: 5
+
+    sensors:
+      - name: "My Battery Battery Voltage"
+        unique_id: my_battery_battery_voltage
+        address: 32100
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scale: 0.01
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Battery Current"
+        unique_id: my_battery_battery_current
+        address: 32101
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scale: 0.01
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Battery Power"
+        unique_id: my_battery_battery_power
+        address: 32102
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Battery SOC"
+        unique_id: my_battery_battery_soc
+        address: 32104
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: "%"
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Battery Energy"
+        unique_id: my_battery_battery_energy
+        address: 32105
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: kWh
+        device_class: power
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery AC Voltage"
+        unique_id: my_battery_ac_voltage
+        address: 32200
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery AC Current"
+        unique_id: my_battery_ac_current
+        address: 32201
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scale: 0.01
+        offset: 0
+        precision: 1
+
+      - name: "My Battery AC Power"
+        unique_id: my_battery_ac_power
+        address: 32202
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      #    - name: "My Battery AC Frequency"
+      #      unique_id: my_battery_ac_frequency
+      #      address: 32204
+      #      slave: 1
+      #      scan_interval: 30
+      #      input_type: holding
+      #      data_type: uint16
+      #      unit_of_measurement: Hz
+      #      device_class: frequency
+      #      state_class: measurement
+      #      scale: 0.01
+      #      offset: 0
+      #      precision: 2
+
+      - name: "My Battery AC Offgrid Voltage"
+        unique_id: my_battery_ac_offgrid_voltage
+        address: 32300
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scale: 0.01
+        offset: 0
+        precision: 1
+
+      - name: "My Battery AC Offgrid Current"
+        unique_id: my_battery_ac_offgrid_current
+        address: 32301
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scale: 0.01
+        offset: 0
+        precision: 1
+
+      - name: "My Battery AC Offgrid Power"
+        unique_id: my_battery_ac_offgrid_power
+        address: 32302
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        data_type: int32
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Total Charging Energy"
+        unique_id: my_battery_total_charging_energy
+        address: 33000
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Total Discharging Energy"
+        unique_id: my_battery_total_discharging_energy
+        address: 33002
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Daily Charging Energy"
+        unique_id: my_battery_daily_charging_energy
+        address: 33004
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Daily Discharging Energy"
+        unique_id: my_battery_daily_discharging_energy
+        address: 33006
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Monthly Charging Energy"
+        unique_id: my_battery_monthly_charging_energy
+        address: 33008
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Monthly Discharging Energy"
+        unique_id: my_battery_monthly_discharging_energy
+        address: 33010
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint32
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: measurement
+        scale: 1
+        offset: 0
+        precision: 0
+
+      - name: "My Battery Internal Temperature"
+        unique_id: my_battery_internal_temperature
+        address: 35000
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Internal MOS1 Temperature"
+        unique_id: my_battery_internal_mos1_temperature
+        address: 35001
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Internal MOS2 Temperature"
+        unique_id: my_battery_internal_mos2_temperature
+        address: 35002
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Max Cell Temperature"
+        unique_id: my_battery_max_cell_temperature
+        address: 35010
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Min Cell Temperature"
+        unique_id: my_battery_min_cell_temperature
+        address: 35011
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: int16
+        unit_of_measurement: °C
+        device_class: temperature
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Inverter State"
+        unique_id: my_battery_inverter_state
+        address: 35100
+        slave: 1
+        scan_interval: 5
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: ""
+        state_class: measurement
+
+      - name: "My Battery Battery Charge Voltage Limit"
+        unique_id: my_battery_battery_charge_voltage_limit
+        address: 35110
+        slave: 1
+        scan_interval: 30
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: V
+        device_class: voltage
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Battery Charge Current Limit"
+        unique_id: my_battery_battery_charge_current_limit
+        address: 35111
+        slave: 1
+        scan_interval: 5
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+
+      - name: "My Battery Battery Discharge Current Limit"
+        unique_id: my_battery_battery_discharge_current_limit
+        address: 35112
+        slave: 1
+        scan_interval: 5
+        input_type: holding
+        data_type: uint16
+        unit_of_measurement: A
+        device_class: current
+        state_class: measurement
+        scale: 0.1
+        offset: 0
+        precision: 1
+# -----------
+# AUTOMATIONS
+# -----------
+
+# ----------------
+# TEMPLATE SENSORS
+# ----------------
+
+template:
+  - sensor:
+      - name: "My Battery Discharging in W"
+        state: >
+          {% if states('sensor.my_battery_ac_power') | float > 0 %}
+            {{ states('sensor.my_battery_ac_power') }}
+          {% else %}
+            0
+          {% endif %}
+        unit_of_measurement: "W"
+
+      - name: "My Battery Charging in W"
+        state: >
+          {% if states('sensor.my_battery_ac_power') | float < 0 %}
+            {{ states('sensor.my_battery_ac_power') }}
+          {% else %}
+            0
+          {% endif %}
+        unit_of_measurement: "W"
+
+# -------
+# SENSORS
+# -------
+
+sensor:
+  - platform: integration
+    name: My Battery Discharging in KWh
+    source: sensor.my_battery_discharging_in_w
+    method: left
+  - platform: integration
+    name: My Battery Charging in KWh
+    source: sensor.my_battery_charging_in_w
+    method: left
+
+# --------------
+# UTILITY METERS
+# --------------
+utility_meter:
+  daily_discharge:
+    name: My Battery Daily Discharging in Kwh
+    source: sensor.my_battery_discharging_in_kwh
+    cycle: daily
+  weekly_discharge:
+    name: My Battery Weekly Discharging in Kwh
+    source: sensor.my_battery_discharging_in_kwh
+    cycle: daily
+  monthly_discharge:
+    name: My Battery Monthly Discharging in Kwh
+    source: sensor.my_battery_discharging_in_kwh
+    cycle: monthly
+  daily_dcharge:
+    name: My Battery Daily Charging in Kwh
+    source: sensor.my_battery_charging_in_kwh
+    cycle: daily
+  weekly_dcharge:
+    name: My Battery Weekly Charging in Kwh
+    source: sensor.my_battery_charging_in_kwh
+    cycle: daily
+  monthly_dcharge:
+    name: My Battery Monthly Charging in Kwh
+    source: sensor.my_battery_charging_in_kwh
+    cycle: monthly
