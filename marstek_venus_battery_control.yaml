@@ -384,6 +384,31 @@ modbus:
         scale: 0.1
         offset: 0
         precision: 1
+
+    switches:
+      - name: "My Battery Enable RS485 Control Mode"
+        unique_id: my_battery_enable_rs485_control_mode
+        address: 42000
+        slave: 1
+        command_on: 21930 # 0x55AA in decimal
+        command_off: 21947 # 0x55BB in decimal
+        write_type: holding
+
+      - name: "My Battery Force Charge Mode"
+        unique_id: my_battery_force_charge_mode
+        address: 42010
+        slave: 1
+        command_on: 1 # Charge mode
+        command_off: 0 # Stop mode
+        write_type: holding
+
+      - name: "My Battery Force Discharge Mode"
+        unique_id: my_battery_force_discharge_mode
+        address: 42010
+        slave: 1
+        command_on: 2 # Discharge mode
+        command_off: 0 # Stop mode
+        write_type: holding
 # -----------
 # AUTOMATIONS
 # -----------
