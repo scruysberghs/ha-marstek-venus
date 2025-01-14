@@ -1,14 +1,14 @@
 # ------
 # MODBUS
 # ------
-
+  
   modbus:
     - name: MarstekVenus
       type: rtuovertcp
       host: 192.168.1.2
       port: 8899
       delay: 1
-      message_wait_milliseconds: 50
+      message_wait_milliseconds: 10
       timeout: 5
   
       sensors:
@@ -476,9 +476,9 @@
       #     command_off: 0 # Stop mode
       #     write_type: holding
   
-  # ------------
-  # INPUT NUMBER
-  # ------------
+# ------------
+# INPUT NUMBER
+# ------------
   input_number:
     my_battery_discharging_charging_power:
       name: "My Battery (dis)charging power"
@@ -528,9 +528,9 @@
   #   slave: 1
   #   value: 0
   
-  # -------
-  # SCRIPTS
-  # -------
+# -------
+# SCRIPTS
+# -------
   script:
     my_battery_set_forcible_charge:
       sequence:
@@ -599,18 +599,18 @@
       description: ""
       icon: mdi:battery-charging-40
   
-  
-  # -----------
-  # AUTOMATIONS
-  # -----------
-  
-  # ----------------
-  # TEMPLATE SENSORS
-  # ----------------
+# -----------
+# AUTOMATIONS
+# -----------
+
+# ----------------
+# TEMPLATE SENSORS
+# ----------------
   
   template:
     - sensor:
         - name: "My Battery Charging in W"
+          unique_id: my_battery_charging_in_w
           state: >
             {% if states('sensor.my_battery_ac_power') | float < 0 %}
               {{ (states('sensor.my_battery_ac_power') | float) * -1 }}
@@ -618,6 +618,7 @@
               0
             {% endif %}
         - name: "My Battery Discharging in W"
+          unique_id: my_battery_discharging_in_w
           state: >
             {% if states('sensor.my_battery_ac_power') | float > 0 %}
               {{ (states('sensor.my_battery_ac_power') | float) * -1 }}
@@ -650,14 +651,16 @@
             {% else %}
               Unknown
             {% endif %}
-  #---------
-  # SWITCHES
-  #---------
+            
+#---------
+# SWITCHES
+#---------
   switch:
     - platform: template
       switches:
         my_battery_rs485_control_mode_switch:
           friendly_name: "My Battery RS485 Control Mode Switch"
+          unique_id: my_battery_rs485_control_mode_switch
           value_template: >
             {% set mode = states('sensor.my_battery_rs485_control_mode') | int %}
             {{ mode == 21930 }}  # True (ON) when Enabled (21930), False (OFF) otherwise
@@ -676,46 +679,54 @@
               address: 42000
               value: 21947 # Write 0x55BB to disable RS485 control mode
   
-  # -------
-  # SENSORS
-  # -------
+# -------
+# SENSORS
+# -------
   
   sensor:
     - platform: integration
       name: My Battery Discharging in KWh
+      unique_id: my_battery_discharging_in_kwh
       source: sensor.my_battery_discharging_in_w
       method: left
     - platform: integration
       name: My Battery Charging in KWh
+      unique_id: my_battery_charging_in_kwh
       source: sensor.my_battery_charging_in_w
       method: left
   
-  # --------------
-  # UTILITY METERS
-  # --------------
+# --------------
+# UTILITY METERS
+# --------------
+
   utility_meter:
     daily_discharge:
       name: My Battery Daily Discharging in Kwh
+      unique_id: my_battery_daily_discharging_in_kwh
       source: sensor.my_battery_discharging_in_kwh
       cycle: daily
     weekly_discharge:
       name: My Battery Weekly Discharging in Kwh
+      unique_id: my_battery_weekly_discharging_in_kwh
       source: sensor.my_battery_discharging_in_kwh
       cycle: weekly
     monthly_discharge:
       name: My Battery Monthly Discharging in Kwh
+      unique_id: my_battery_monthly_discharging_in_kwh
       source: sensor.my_battery_discharging_in_kwh
       cycle: monthly
     daily_charge:
       name: My Battery Daily Charging in Kwh
+      unique_id: my_battery_daily_charging_in_kwh
       source: sensor.my_battery_charging_in_kwh
       cycle: daily
     weekly_charge:
       name: My Battery Weekly Charging in Kwh
+      unique_id: my_battery_weekly_charging_in_kw
       source: sensor.my_battery_charging_in_kwh
       cycle: weekly
     monthly_charge:
       name: My Battery Monthly Charging in Kwh
+      unique_id: my_battery_monthly_charging_in_kw
       source: sensor.my_battery_charging_in_kwh
       cycle: monthly
-  
