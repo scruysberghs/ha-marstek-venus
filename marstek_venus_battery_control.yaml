@@ -8,7 +8,7 @@
       host: 192.168.1.2
       port: 8899
       delay: 1
-      message_wait_milliseconds: 10
+      message_wait_milliseconds: 30
       timeout: 5
   
       sensors:
@@ -621,7 +621,7 @@
           unique_id: my_battery_discharging_in_w
           state: >
             {% if states('sensor.my_battery_ac_power') | float > 0 %}
-              {{ (states('sensor.my_battery_ac_power') | float) * -1 }}
+              {{ (states('sensor.my_battery_ac_power') | float) }}
             {% else %}
               0
             {% endif %}
