@@ -1,0 +1,68 @@
+blueprint:
+  name: My Battery Grid to 0
+  description: "Adjust the battery discharge/charge power to balance the grid power to 0."
+  domain: automation
+  input:
+    power_to_grid:
+      name: Power to Grid Sensor
+      description: Select the sensor that represents power to the grid.
+      selector:
+        entity:
+          domain: sensor
+    power_from_grid:
+      name: Power from Grid Sensor
+      description: Select the sensor that represents power from the grid.
+      selector:
+        entity:
+          domain: sensor
+    battery_discharge:
+      name: Battery Discharge Sensor
+      description: Select the sensor that represents battery discharge power.
+      selector:
+        entity:
+          domain: sensor
+    battery_target:
+      name: Target Input Number
+      description: Input number to set battery charging/discharging power.
+      selector:
+        entity:
+          domain: input_number
+    battery_control_script:
+      name: Battery Control Script
+      description: Script to control battery charging/discharging.
+      selector:
+        entity:
+          domain: script
+
+trigger:
+  - platform: time_pattern
+    seconds: "/30"
+
+condition: []
+
+action:
+  - service: input_number.set_value
+    data:
+      value: >
+        {{
+          (
+            states(input.power_to_grid) | float(0) +
+            states(input.battery_discharge) | float(0) -
+            states(input.power_from_grid) | float(0)
+          )
+        }}
+    target:
+      entity_id: !input battery_target
+
+  - service: script.turn_on
+    target:
+      entity_id: !input battery_control_script
+
+  - service: homeassistant.update_entity
+    data:
+      entity_id:
+        - !input power_to_grid
+        - !input power_from_grid
+        - !input battery_discharge
+
+mode: single
