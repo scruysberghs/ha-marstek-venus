@@ -611,6 +611,9 @@
     - sensor:
         - name: "My Battery Charging in W"
           unique_id: my_battery_charging_in_w
+          unit_of_measurement: W
+          device_class: power
+          state_class: measurement
           state: >
             {% if states('sensor.my_battery_ac_power') | float < 0 %}
               {{ (states('sensor.my_battery_ac_power') | float) * -1 }}
@@ -619,13 +622,15 @@
             {% endif %}
         - name: "My Battery Discharging in W"
           unique_id: my_battery_discharging_in_w
+          unit_of_measurement: W
+          device_class: power
+          state_class: measurement
           state: >
             {% if states('sensor.my_battery_ac_power') | float > 0 %}
               {{ (states('sensor.my_battery_ac_power') | float) }}
             {% else %}
               0
             {% endif %}
-  
         - name: "My Battery Force Charge/Discharge Mode Status"
           unique_id: my_battery_force_charge_discharge_mode_status
           state: >
@@ -688,11 +693,15 @@
       name: My Battery Discharging in KWh
       unique_id: my_battery_discharging_in_kwh
       source: sensor.my_battery_discharging_in_w
+      unit_prefix: k
+      round: 2
       method: left
     - platform: integration
       name: My Battery Charging in KWh
       unique_id: my_battery_charging_in_kwh
       source: sensor.my_battery_charging_in_w
+      unit_prefix: k
+      round: 2
       method: left
   
 # --------------
