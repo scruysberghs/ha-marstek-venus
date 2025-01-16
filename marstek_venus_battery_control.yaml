@@ -631,6 +631,20 @@
             {% else %}
               0
             {% endif %}
+
+        - name: "My Battery Discharging in kWh (Dashboard Compatible)"
+          unique_id: my_battery_discharging_in_kwh_dashboard
+          unit_of_measurement: kWh
+          device_class: energy
+          state_class: total_increasing
+          state: "{{ states('sensor.my_battery_discharging_in_kwh') }}"
+        - name: "My Battery Charging in kWh (Dashboard Compatible)"
+          unique_id: my_battery_charging_in_kwh_dashboard
+          unit_of_measurement: kWh
+          device_class: energy
+          state_class: total_increasing
+          state: "{{ states('sensor.my_battery_charging_in_kwh') }}"
+          
         - name: "My Battery Force Charge/Discharge Mode Status"
           unique_id: my_battery_force_charge_discharge_mode_status
           state: >
@@ -708,34 +722,34 @@
 # UTILITY METERS
 # --------------
 
-  utility_meter:
-    daily_discharge:
-      name: My Battery Daily Discharging in Kwh
-      unique_id: my_battery_daily_discharging_in_kwh
-      source: sensor.my_battery_discharging_in_kwh
-      cycle: daily
-    weekly_discharge:
-      name: My Battery Weekly Discharging in Kwh
-      unique_id: my_battery_weekly_discharging_in_kwh
-      source: sensor.my_battery_discharging_in_kwh
-      cycle: weekly
-    monthly_discharge:
-      name: My Battery Monthly Discharging in Kwh
-      unique_id: my_battery_monthly_discharging_in_kwh
-      source: sensor.my_battery_discharging_in_kwh
-      cycle: monthly
-    daily_charge:
-      name: My Battery Daily Charging in Kwh
-      unique_id: my_battery_daily_charging_in_kwh
-      source: sensor.my_battery_charging_in_kwh
-      cycle: daily
-    weekly_charge:
-      name: My Battery Weekly Charging in Kwh
-      unique_id: my_battery_weekly_charging_in_kw
-      source: sensor.my_battery_charging_in_kwh
-      cycle: weekly
-    monthly_charge:
-      name: My Battery Monthly Charging in Kwh
-      unique_id: my_battery_monthly_charging_in_kw
-      source: sensor.my_battery_charging_in_kwh
-      cycle: monthly
+utility_meter:
+  daily_discharge:
+    name: My Battery Daily Discharging in Kwh
+    unique_id: my_battery_daily_discharging_in_kwh
+    source: sensor.my_battery_discharging_in_kwh_dashboard
+    cycle: daily
+  weekly_discharge:
+    name: My Battery Weekly Discharging in Kwh
+    unique_id: my_battery_weekly_discharging_in_kwh
+    source: sensor.my_battery_discharging_in_kwh_dashboard
+    cycle: weekly
+  monthly_discharge:
+    name: My Battery Monthly Discharging in Kwh
+    unique_id: my_battery_monthly_discharging_in_kwh
+    source: sensor.my_battery_discharging_in_kwh_dashboard
+    cycle: monthly
+  daily_charge:
+    name: My Battery Daily Charging in Kwh
+    unique_id: my_battery_daily_charging_in_kwh
+    source: sensor.my_battery_charging_in_kwh_dashboard
+    cycle: daily
+  weekly_charge:
+    name: My Battery Weekly Charging in Kwh
+    unique_id: my_battery_weekly_charging_in_kw
+    source: sensor.my_battery_charging_in_kwh_dashboard
+    cycle: weekly
+  monthly_charge:
+    name: My Battery Monthly Charging in Kwh
+    unique_id: my_battery_monthly_charging_in_kw
+    source: sensor.my_battery_charging_in_kwh_dashboard
+    cycle: monthly
