@@ -609,6 +609,68 @@
       alias: My Battery Set Forcible Charge
       description: ""
       icon: mdi:battery-charging-40
+
+    my_battery_handle_battry_charge_soc:
+      alias: Handle Battery Charge State Of Charge
+      description: Adjust battery charging based on power and state of charge
+      icon: mdi:battery-charging-40
+      fields:
+        power:
+          description: The power value (can be positive, negative, or zero)
+          example: "-200"
+        state_of_charge:
+          description: The target state of charge
+          example: "80"
+      sequence:
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ power | int < 0 }}"
+              sequence:
+                - action: modbus.write_register
+                  data:
+                    hub: MarstekVenus
+                    address: 44002
+                    slave: 1
+                    value:
+                      - 0
+                      - "{{ power | int | abs }}"
+                - action: modbus.write_register
+                  data:
+                    hub: MarstekVenus
+                    address: 42011
+                    slave: 1
+                    value: "{{ state_of_charge | int }}"
+            - conditions:
+                - condition: template
+                  value_template: "{{ power | int > 0 }}"
+              sequence:
+                - action: modbus.write_register
+                  data:
+                    hub: MarstekVenus
+                    address: 44002
+                    slave: 1
+                    value:
+                      - "{{ power | int | abs }}"
+                      - 0
+                - action: modbus.write_register
+                  data:
+                    hub: MarstekVenus
+                    address: 42011
+                    slave: 1
+                    value: "{{ state_of_charge | int }}"
+            - conditions:
+                - condition: template
+                  value_template: "{{ power | int == 0 }}"
+              sequence:
+                - action: modbus.write_register
+                  data:
+                    hub: MarstekVenus
+                    address: 44002
+                    slave: 1
+                    value:
+                      - 0
+                      - 0
   
 # -----------
 # AUTOMATIONS
