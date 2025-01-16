@@ -450,6 +450,17 @@
           scale: 1
           offset: 0
           precision: 0
+        
+        #test om meerdere registers in 1 keer uit te lezen en deze dante parsen in templates
+
+        - name: "My Battery 44000 range"
+          unique_id: my_battery_44000_range
+          address: 44000 # Start address
+          count: 4 # Number of registers to read
+          input_type: holding
+          scan_interval: 10 # Polling interval (optional)
+          data_type: custom
+          structure: ">4H" # Big-endian, 4 unsigned 16-bit integers
   
       # switches:
       #   - name: "My Battery Enable RS485 Control Mode"
@@ -670,6 +681,34 @@
             {% else %}
               Unknown
             {% endif %}
+
+        - name: "My Battery Charging Cutoff Capacity"
+          unique_id: my_battery_charging_cutoff_capacity
+          unit_of_measurement: "%"
+          state: >
+            {{ states('sensor.my_battery_44000_range').split(',')[0] | int(0) * 0.1 }}
+
+        - name: "My Battery Discharging Cutoff Capacity"
+          unique_id: my_battery_discharging_cutoff_capacity
+          unit_of_measurement: "%"
+          state: >
+            {{ states('sensor.my_battery_44000_range').split(',')[1] | int(0) * 0.1 }}
+
+        - name: "My Battery Max Charge Power"
+          unique_id: my_battery_max_charge_power
+          unit_of_measurement: W
+          device_class: power
+          state_class: measurement
+          state: >
+            {{ states('sensor.my_battery_44000_range').split(',')[2] | int(0) }}
+
+        - name: "My Battery Max Discharge Power"
+          unique_id: my_battery_max_discharge_power
+          unit_of_measurement: W
+          device_class: power
+          state_class: measurement
+          state: >
+            {{ states('sensor.my_battery_44000_range').split(',')[3] | int(0) }}
             
 #---------
 # SWITCHES
