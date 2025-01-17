@@ -660,7 +660,7 @@
         id: sensor_to_input_select
       - trigger: state
         entity_id:
-          - input_select.my_battery_user_work_mode
+          - input_select.my_battery_user_work_mode_input_select
         id: input_select_to_sensor
     conditions: []
     actions:
@@ -684,7 +684,7 @@
                       Manual
                     {% endif %}
                 target:
-                  entity_id: input_select.my_battery_user_work_mode
+                  entity_id: input_select.my_battery_user_work_mode_input_select
           - conditions:
               - condition: trigger
                 id:
@@ -697,13 +697,13 @@
                   address: 43000
                   slave: 1
                   value: >
-                    {% if is_state('input_select.my_battery_user_work_mode',
+                    {% if is_state('input_select.my_battery_user_work_mode_input_select',
                     'Manual') %}
                       0
-                    {% elif is_state('input_select.my_battery_user_work_mode',
+                    {% elif is_state('input_select.my_battery_user_work_mode_input_select',
                     'Anti-Feed') %}
                       1
-                    {% elif is_state('input_select.my_battery_user_work_mode',
+                    {% elif is_state('input_select.my_battery_user_work_mode_input_select',
                     'Trade Mode') %}
                       2
                     {% else %}
