@@ -5,7 +5,7 @@
   modbus:
     - name: MarstekVenus
       type: rtuovertcp
-      host: 192.168.1.2
+      host: 192.168.1.2  #change to homeassistant server ip where the modbus proxy is running
       port: 8899
       delay: 1
       message_wait_milliseconds: 30
@@ -16,7 +16,7 @@
           unique_id: my_battery_battery_voltage
           address: 32100
           slave: 1
-          scan_interval: 10
+          scan_interval: 300
           input_type: holding
           data_type: uint16
           unit_of_measurement: V
@@ -30,7 +30,7 @@
           unique_id: my_battery_battery_current
           address: 32101
           slave: 1
-          scan_interval: 10
+          scan_interval: 300
           input_type: holding
           data_type: int16
           unit_of_measurement: A
@@ -58,7 +58,7 @@
           unique_id: my_battery_battery_soc
           address: 32104
           slave: 1
-          scan_interval: 30
+          scan_interval: 60
           input_type: holding
           data_type: uint16
           unit_of_measurement: "%"
@@ -67,7 +67,7 @@
           offset: 0
           precision: 0
   
-        - name: "My Battery Battery Energy"
+          - name: "My Battery Battery Energy"
           unique_id: my_battery_battery_energy
           address: 32105
           slave: 1
@@ -77,7 +77,7 @@
           unit_of_measurement: kWh
           device_class: power
           state_class: measurement
-          scale: 1
+          scale: 0.001
           offset: 0
           precision: 0
   
@@ -85,7 +85,7 @@
           unique_id: my_battery_ac_voltage
           address: 32200
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint16
           unit_of_measurement: V
@@ -99,7 +99,7 @@
           unique_id: my_battery_ac_current
           address: 32201
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: int16
           unit_of_measurement: A
@@ -141,7 +141,7 @@
           unique_id: my_battery_ac_offgrid_voltage
           address: 32300
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint16
           unit_of_measurement: V
@@ -155,7 +155,7 @@
           unique_id: my_battery_ac_offgrid_current
           address: 32301
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: int16
           unit_of_measurement: A
@@ -179,17 +179,17 @@
           offset: 0
           precision: 0
   
-        - name: "My Battery Total Charging Energy"
+          - name: "My Battery Total Charging Energy"
           unique_id: my_battery_total_charging_energy
           address: 33000
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint32
           unit_of_measurement: kWh
           device_class: energy
           state_class: measurement
-          scale: 1
+          scale: 0.01
           offset: 0
           precision: 0
   
@@ -197,13 +197,13 @@
           unique_id: my_battery_total_discharging_energy
           address: 33002
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint32
           unit_of_measurement: kWh
           device_class: energy
           state_class: measurement
-          scale: 1
+          scale: 0.01
           offset: 0
           precision: 0
   
@@ -211,13 +211,13 @@
           unique_id: my_battery_daily_charging_energy
           address: 33004
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint32
           unit_of_measurement: kWh
           device_class: energy
           state_class: measurement
-          scale: 1
+          scale: 0.01
           offset: 0
           precision: 0
   
@@ -225,13 +225,13 @@
           unique_id: my_battery_daily_discharging_energy
           address: 33006
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint32
           unit_of_measurement: kWh
           device_class: energy
           state_class: measurement
-          scale: 1
+          scale: 0.01
           offset: 0
           precision: 0
   
@@ -239,13 +239,13 @@
           unique_id: my_battery_monthly_charging_energy
           address: 33008
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint32
           unit_of_measurement: kWh
           device_class: energy
           state_class: measurement
-          scale: 1
+          scale: 0.01
           offset: 0
           precision: 0
   
@@ -253,13 +253,13 @@
           unique_id: my_battery_monthly_discharging_energy
           address: 33010
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint32
           unit_of_measurement: kWh
           device_class: energy
           state_class: measurement
-          scale: 1
+          scale: 0.01
           offset: 0
           precision: 0
   
@@ -267,7 +267,7 @@
           unique_id: my_battery_internal_temperature
           address: 35000
           slave: 1
-          scan_interval: 30
+          scan_interval: 600
           input_type: holding
           data_type: int16
           unit_of_measurement: °C
@@ -281,7 +281,7 @@
           unique_id: my_battery_internal_mos1_temperature
           address: 35001
           slave: 1
-          scan_interval: 30
+          scan_interval: 600
           input_type: holding
           data_type: int16
           unit_of_measurement: °C
@@ -295,7 +295,7 @@
           unique_id: my_battery_internal_mos2_temperature
           address: 35002
           slave: 1
-          scan_interval: 30
+          scan_interval: 600
           input_type: holding
           data_type: int16
           unit_of_measurement: °C
@@ -309,7 +309,7 @@
           unique_id: my_battery_max_cell_temperature
           address: 35010
           slave: 1
-          scan_interval: 30
+          scan_interval: 600
           input_type: holding
           data_type: int16
           unit_of_measurement: °C
@@ -323,7 +323,7 @@
           unique_id: my_battery_min_cell_temperature
           address: 35011
           slave: 1
-          scan_interval: 30
+          scan_interval: 600
           input_type: holding
           data_type: int16
           unit_of_measurement: °C
@@ -347,7 +347,7 @@
           unique_id: my_battery_battery_charge_voltage_limit
           address: 35110
           slave: 1
-          scan_interval: 30
+          scan_interval: 300
           input_type: holding
           data_type: uint16
           unit_of_measurement: V
@@ -361,7 +361,7 @@
           unique_id: my_battery_battery_charge_current_limit
           address: 35111
           slave: 1
-          scan_interval: 5
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: A
@@ -375,7 +375,7 @@
           unique_id: my_battery_battery_discharge_current_limit
           address: 35112
           slave: 1
-          scan_interval: 5
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: A
@@ -389,6 +389,7 @@
           unique_id: my_battery_rs485_control_mode
           address: 42000
           slave: 1
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: ""
@@ -400,6 +401,7 @@
           unique_id: my_battery_force_charge_discharge_mode
           address: 42010
           slave: 1
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: ""
@@ -411,6 +413,7 @@
           unique_id: my_battery_charge_to_soc
           address: 42011
           slave: 1
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: "%"
@@ -422,6 +425,7 @@
           unique_id: my_battery_forcible_charge_power
           address: 42020
           slave: 1
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: W
@@ -432,24 +436,14 @@
         - name: "My Battery Forcible Discharge Power"
           unique_id: my_battery_forcible_discharge_power
           address: 42021
-          slave: 1
+          scan_interval: 10
           input_type: holding
           data_type: uint16
           unit_of_measurement: W
           scale: 1
           offset: 0
           precision: 0
-  
-        - name: "My Battery User Work Mode"
-          unique_id: my_battery_user_work_mode
-          address: 43000
-          slave: 1
-          input_type: holding
-          data_type: uint16
-          unit_of_measurement: ""
-          scale: 1
-          offset: 0
-          precision: 0
+
         
         #test om meerdere registers in 1 keer uit te lezen en deze dante parsen in templates
 
@@ -461,6 +455,13 @@
           scan_interval: 10 # Polling interval (optional)
           data_type: custom
           structure: ">4H" # Big-endian, 4 unsigned 16-bit integers
+ 
+          - name: "My Battery User Work Mode"
+          unique_id: my_battery_user_work_mode_modbus
+          address: 43000
+          input_type: holding
+          data_type: uint16
+          scan_interval: 10 
   
       # switches:
       #   - name: "My Battery Enable RS485 Control Mode"
@@ -498,46 +499,19 @@
       step: 50
       unit_of_measurement: W
       mode: slider
+
+# ------------
+# INPUT SELECT
+# ------------
+  input_select:
+    my_battery_user_work_mode_input_select:
+      name: My Battery User Work Mode
+      options:
+        - "Manual"
+        - "Anti-Feed"
+        - "Trade Mode"
+      initial: "Manual"
   
-  # # charge power
-  # action: modbus.write_register
-  # data:
-  #   hub: MarstekVenus
-  #   address: 42020
-  #   slave: 1
-  #   value: 200
-  
-  # # discharge power
-  # action: modbus.write_register
-  # data:
-  #   hub: MarstekVenus
-  #   address: 42021
-  #   slave: 1
-  #   value: 200
-  
-  # # force discharge
-  # action: modbus.write_register
-  # data:
-  #   hub: MarstekVenus
-  #   address: 42010
-  #   slave: 1
-  #   value: 2
-  
-  # # force charge
-  # action: modbus.write_register
-  # data:
-  #   hub: MarstekVenus
-  #   address: 42010
-  #   slave: 1
-  #   value: 1
-  
-  # # stop forcible discharge
-  # action: modbus.write_register
-  # data:
-  #   hub: MarstekVenus
-  #   address: 42010
-  #   slave: 1
-  #   value: 0
   
 # -------
 # SCRIPTS
@@ -675,7 +649,165 @@
 # -----------
 # AUTOMATIONS
 # -----------
+  - id: my_battery_sync_modbus_and_input_select
+    alias: "My Battery Sync Modbus and Input Select"
+    description: "sync modbus sensor with input select "
+    mode: single
+    triggers:
+      - trigger: state
+        entity_id:
+          - sensor.my_battery_user_work_mode
+        id: sensor_to_input_select
+      - trigger: state
+        entity_id:
+          - input_select.my_battery_user_work_mode
+        id: input_select_to_sensor
+    conditions: []
+    actions:
+      - choose:
+          - conditions:
+              - condition: trigger
+                id:
+                  - sensor_to_input_select
+            sequence:
+              - action: input_select.select_option
+                metadata: {}
+                data:
+                  option: >
+                    {% if states('sensor.my_battery_user_work_mode') | int == 0 %}
+                      Manual
+                    {% elif states('sensor.my_battery_user_work_mode') | int == 1 %}
+                      Anti-Feed
+                    {% elif states('sensor.my_battery_user_work_mode') | int == 2 %}
+                      Trade Mode
+                    {% else %}
+                      Manual
+                    {% endif %}
+                target:
+                  entity_id: input_select.my_battery_user_work_mode
+          - conditions:
+              - condition: trigger
+                id:
+                  - input_select_to_sensor
+            sequence:
+              - action: modbus.write_register
+                metadata: {}
+                data:
+                  hub: MarstekVenus
+                  address: 43000
+                  slave: 1
+                  value: >
+                    {% if is_state('input_select.my_battery_user_work_mode',
+                    'Manual') %}
+                      0
+                    {% elif is_state('input_select.my_battery_user_work_mode',
+                    'Anti-Feed') %}
+                      1
+                    {% elif is_state('input_select.my_battery_user_work_mode',
+                    'Trade Mode') %}
+                      2
+                    {% else %}
+                      0
+                    {% endif %}
 
+# ----------------
+# TEMPLATE SENSORS
+# ----------------
+
+template:
+  - sensor:
+      - name: "My Battery Charging in W"
+        unique_id: my_battery_charging_in_w
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        state: >
+          {% if states('sensor.my_battery_ac_power') | float < 0 %}
+            {{ (states('sensor.my_battery_ac_power') | float) * -1 }}
+          {% else %}
+            0
+          {% endif %}
+      - name: "My Battery Discharging in W"
+        unique_id: my_battery_discharging_in_w
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        state: >
+          {% if states('sensor.my_battery_ac_power') | float > 0 %}
+            {{ (states('sensor.my_battery_ac_power') | float) }}
+          {% else %}
+            0
+          {% endif %}
+
+      - name: "My Battery Discharging in kWh (Dashboard Compatible)"
+        unique_id: my_battery_discharging_in_kwh_dashboard
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        state: "{{ states('sensor.my_battery_discharging_in_kwh') }}"
+      - name: "My Battery Charging in kWh (Dashboard Compatible)"
+        unique_id: my_battery_charging_in_kwh_dashboard
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        state: "{{ states('sensor.my_battery_charging_in_kwh') }}"
+
+      - name: "My Battery Force Charge/Discharge Mode Status"
+        unique_id: my_battery_force_charge_discharge_mode_status
+        state: >
+          {% set mode = states('sensor.my_battery_force_charge_discharge_mode') | int %}
+          {% if mode == 0 %}
+            Stop
+          {% elif mode == 1 %}
+            Charge
+          {% elif mode == 2 %}
+            Discharge
+          {% else %}
+            Unknown
+          {% endif %}
+
+      - name: "My Battery RS485 Control Mode Status"
+        unique_id: my_battery_rs485_control_mode_status
+        state: >
+          {% set mode = states('sensor.my_battery_rs485_control_mode') | int %}
+          {% if mode == 21930 %}
+            Enabled
+          {% elif mode == 21947 %}
+            Disabled
+          {% else %}
+            Unknown
+          {% endif %}
+
+      - name: "My Battery Charging Cutoff Capacity"
+        unique_id: my_battery_charging_cutoff_capacity
+        unit_of_measurement: "%"
+        state: >
+          {{ states('sensor.my_battery_44000_range').split(',')[0] | int(0) * 0.1 }}
+
+      - name: "My Battery Discharging Cutoff Capacity"
+        unique_id: my_battery_discharging_cutoff_capacity
+        unit_of_measurement: "%"
+        state: >
+          {{ states('sensor.my_battery_44000_range').split(',')[1] | int(0) * 0.1 }}
+
+      - name: "My Battery Max Charge Power"
+        unique_id: my_battery_max_charge_power
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        state: >
+          {{ states('sensor.my_battery_44000_range').split(',')[2] | int(0) }}
+
+      - name: "My Battery Max Discharge Power"
+        unique_id: my_battery_max_discharge_power
+        unit_of_measurement: W
+        device_class: power
+        state_class: measurement
+        state: >
+          {{ states('sensor.my_battery_44000_range').split(',')[3] | int(0) }}
+
+
+          
 # ----------------
 # TEMPLATE SENSORS
 # ----------------
