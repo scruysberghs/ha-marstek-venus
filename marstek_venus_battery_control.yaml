@@ -5,8 +5,8 @@
   modbus:
     - name: MarstekVenus
       type: rtuovertcp
-      host: 192.168.1.2  #change to homeassistant server ip where the modbus proxy is running
-      port: 8899
+      host: x.x.x.x #change to modbus dongle ip
+      port: 502
       delay: 1
       message_wait_milliseconds: 30
       timeout: 5
