@@ -45,8 +45,6 @@ modbus_controller:
     command_throttle: 200ms
     update_interval: 1s
 
-#modbus registers
-# range 31000-
 text_sensor:
    - name: "Marstek device name"
      icon: "mdi:information"
@@ -58,41 +56,36 @@ text_sensor:
      response_size: 20
      skip_updates: 30
 
-#binary_sensor:
-  #huawei example , kan gebruikt worden  voor alarm codes, fault word en grid standards 
-  # Range 32000 - 32019 (1/2)
-  # Register 32000
-  # - name: "Huawei inverter state standby"
-  #   icon: "mdi:information"
-  #   platform: modbus_controller
-  #   modbus_controller_id: marstek_venus
-  #   register_type: holding
-  #   address: 32000
-  #   bitmask: 0x001
-  # - name: "Huawei inverter state grid-connected"
-  #   icon: "mdi:information"
-  #   platform: modbus_controller
-  #   modbus_controller_id: marstek_venus
-  #   register_type: holding
-  #   address: 32000
-  #   bitmask: 0x002
-  # - name: "Huawei inverter state grid-connected normally"
-  #   icon: "mdi:information"
-  #   platform: modbus_controller
-  #   modbus_controller_id: marstek_venus
-  #   register_type: holding
-  #   address: 32000
-  #   bitmask: 0x004
-  # - name: "Huawei inverter state grid connection with derating due to power rationing"
-  #   icon: "mdi:information"
-  #   platform: modbus_controller
-  #   modbus_controller_id: marstek_venus
-  #   register_type: holding
-  #   address: 32000
-  #   bitmask: 0x008
+binary_sensor:
+  - platform: modbus_controller
+    name: "Marstek Battery Protection Active"
+    icon: "mdi:information"
+    modbus_controller_id: marstek_venus
+    register_type: holding
+    address: 44001
+    bitmask: 0x01
+    skip_updates: 30
+  - platform: modbus_controller
+    name: "Marstek Battery Overvoltage Warning"
+    icon: "mdi:information"
+    modbus_controller_id: marstek_venus
+    register_type: holding
+    address: 44002
+    bitmask: 0x02
+    skip_updates: 30
+  - platform: modbus_controller
+    name: "Battery Undervoltage Warning"
+    icon: "mdi:information"
+    modbus_controller_id: marstek_venus
+    register_type: holding
+    address: 44003
+    bitmask: 0x04
+    skip_updates: 30
+
 
 sensor:
-  - name: "Battery State of Charge"
+  - name: "Marstek Battery State of Charge"
+    icon: mdi:battery-70
     platform: modbus_controller
     modbus_controller_id: marstek_venus
     register_type: holding
@@ -101,9 +94,9 @@ sensor:
     unit_of_measurement: "%"
     accuracy_decimals: 1
     skip_updates: 30
-
   - name: "Marstek total charging energy"
     platform: modbus_controller
+    icon: mdi:battery-arrow-up
     modbus_controller_id: marstek_venus
     register_type: holding
     address: 33000
@@ -117,6 +110,7 @@ sensor:
       - multiply: 0.01
   - name: "Marstek total discharging energy"
     platform: modbus_controller
+    icon: mdi:battery-arrow-down
     modbus_controller_id: marstek_venus
     register_type: holding
     address: 33002
@@ -132,6 +126,7 @@ sensor:
 select:
   - platform: modbus_controller
     name: "Marstek forcible charge/discharge"
+    icon: mdi:swap-horizontal
     modbus_controller_id: marstek_venus
     address: 42010
     value_type: U_WORD
@@ -140,3 +135,49 @@ select:
       "Charge": 1
       "Discharge": 2
     skip_updates: 10
+
+# number:
+#   - platform: modbus_controller
+#     name: "Marstek forcible charge power"
+#     icon: mdi:tune-variant
+#     modbus_controller_id: marstek_venus
+#     register_type: holding
+#     address: 42011
+#     value_type: U_WORD
+#     unit_of_measurement: "W"
+#     min_value: 0
+#     max_value: 2500
+#     step: 50
+#     write_lambda: |-
+#       // Convert the value to an integer explicitly
+#       return uint16_t(x);
+#   - platform: modbus_controller
+#     name: "Marstek forcible discharge power"
+#     icon: mdi:tune-variant
+#     modbus_controller_id: marstek_venus
+#     register_type: holding
+#     address: 42020
+#     value_type: U_WORD
+#     unit_of_measurement: "W"
+#     min_value: 0
+#     max_value: 2500
+#     step: 50
+#     write_lambda: |-
+#       // Convert the value to an integer explicitly
+#       return uint16_t(x);
+
+switch:
+  - platform: modbus_controller
+    name: "Marstek RS485 Control Mode"
+    icon: mdi:transfer
+    modbus_controller_id: marstek_venus
+    register_type: holding
+    address: 42000
+    write_lambda: |-
+      if (x) {
+        // Enable RS485 control mode
+        return 0x55AA;
+      } else {
+        // Disable RS485 control mode
+        return 0x55BB;
+      }
