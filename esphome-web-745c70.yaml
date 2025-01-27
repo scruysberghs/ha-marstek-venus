@@ -170,7 +170,7 @@ sensor:
     skip_updates: 300
     filters:
       - multiply: 0.01
-    - name: "Marstek monthly charging energy"
+  - name: "Marstek monthly charging energy"
     platform: modbus_controller
     icon: mdi:battery-arrow-up
     modbus_controller_id: marstek_venus
@@ -288,7 +288,7 @@ number:
     unit_of_measurement: "W"
     min_value: 0
     max_value: 2500
-    step: 50
+    step: 1
     skip_updates: 5
     # write_lambda: |-
     #   // Convert the value to an integer explicitly
@@ -304,7 +304,7 @@ number:
     unit_of_measurement: "W"
     min_value: 0
     max_value: 2500
-    step: 50
+    step: 1
     skip_updates: 5
     # write_lambda: |-
     #   // Convert the value to an integer explicitly
