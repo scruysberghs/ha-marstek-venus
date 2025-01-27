@@ -1,0 +1,47 @@
+type: grid
+cards:
+  - type: heading
+    heading: Marstek Venus Modbus over ESP
+    heading_style: title
+    icon: mdi:battery
+    badges:
+      - type: entity
+        entity: sensor.esphome_web_745c70_marstek_ac_power
+      - type: entity
+        entity: sensor.esphome_web_745c70_marstek_battery_state_of_charge
+  - type: entities
+    entities:
+      - entity: sensor.esphome_web_745c70_marstek_ac_power
+        name: Marstek AC power
+      - entity: sensor.esphome_web_745c70_marstek_battery_state_of_charge
+        name: Marstek Battery State of Charge
+      - entity: sensor.esphome_web_745c70_marstek_daily_charging_energy
+        name: Marstek daily charging energy
+      - entity: sensor.esphome_web_745c70_marstek_daily_discharging_energy
+        name: Marstek daily discharging energy
+    title: Marstek Sensors
+  - type: entities
+    entities:
+      - entity: number.esphome_web_745c70_marstek_charge_to_soc
+        name: Marstek charge to SOC
+      - entity: number.esphome_web_745c70_marstek_max_charge_power
+        name: Marstek max charge power
+      - entity: number.esphome_web_745c70_marstek_max_discharge_power
+        name: Marstek max discharge power
+      - entity: select.esphome_web_745c70_marstek_forcible_charge_discharge
+        name: Marstek forcible charge/discharge
+      - entity: number.esphome_web_745c70_marstek_forcible_charge_power
+        name: Marstek forcible charge power
+      - entity: number.esphome_web_745c70_marstek_forcible_discharge_power
+        name: Marstek forcible discharge power
+      - entity: select.esphome_web_745c70_marstek_rs485_control_mode_select
+        name: Marstek RS485 Control Mode Select
+      - entity: select.esphome_web_745c70_marstek_user_work_mode
+        name: Marstek user work mode
+      - entity: select.esphome_web_745c70_marstek_backup_function
+        name: Marstek backup function
+      - entity: number.esphome_web_745c70_marstek_charging_cutoff_capacity
+        name: Marstek charging cutoff capacity
+      - entity: number.esphome_web_745c70_marstek_discharging_cutoff_capacity
+        name: Marstek discharging cutoff capacity
+    title: Marstek Manual Battery Control
